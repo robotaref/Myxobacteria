@@ -12,18 +12,15 @@ int TryNum=1;
 double data[steps/frequency+1][change];
 int main(int argc, char *argv[])
 {
-    for(int i=0;i<=steps/frequency;i++){
-        for(int j=0;j<change;j++)
-            data[i][0]=0;
-    }
-   // QApplication a(argc, argv);
-    for(int wtc=0;wtc<change;wtc++){
-        for(int tr=0;tr<TryNum;tr++){
-            Envoriment *e=new Envoriment(200,200,20,1,100,4);
-
-//            MainWindow w(e,500,500);
-            int V=0;
-            if(V==0){
+    int V=1;
+    if(V==0){
+        for(int i=0;i<=steps/frequency;i++){
+            for(int j=0;j<change;j++)
+                data[i][0]=0;
+        }
+        for(int wtc=0;wtc<change;wtc++){
+            for(int tr=0;tr<TryNum;tr++){
+                Envoriment *e=new Envoriment(200,200,20,1,100,4);
                 for(int t=0;t<=steps;t++){
                     e->update();
                     // e->DesnityToFile(t,10);
@@ -36,26 +33,32 @@ int main(int argc, char *argv[])
                     }
                 }
             }
-//            else{
-//                QTimer *t=new QTimer();
-//                t->start(1);
-//                w.show();
-//                MainWindow::connect(t,SIGNAL(timeout()),&w,SLOT(repaint()));
-//            }
         }
+        ofstream file;
+        file.open("output.txt");
+        cout<<file.is_open()<<endl;
+        for(int i=0;i<steps/frequency;i++){
+            file<<i*frequency<<"\t";
+            for(int j=0;j<change;j++)
+                file<<data[i][j]/(j*10+1)<<"\t";
+            file<<endl;
+        }
+        return 0;
     }
 
+        QApplication a(argc, argv);
+        Envoriment *e=new Envoriment(200,200,20,1,100,4);
 
-    ofstream file;
-    file.open("output.txt");
-    cout<<file.is_open()<<endl;
-    for(int i=0;i<steps/frequency;i++){
-        file<<i*frequency<<"\t";
-        for(int j=0;j<change;j++)
-            file<<data[i][j]/(j*10+1)<<"\t";
-        file<<endl;
-    }
-    return 0;
+        MainWindow w(e,500,500);
+
+        QTimer *t=new QTimer();
+        t->start(1);
+        w.show();
+        MainWindow::connect(t,SIGNAL(timeout()),&w,SLOT(repaint()));
+
+    return a.exec();
+
+
 }
 
 
