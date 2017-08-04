@@ -5,6 +5,13 @@
 #include <stdlib.h>
 #include <iostream>
 using namespace std;
+double Bacteria::FindNextRev(double T)
+{
+    double x=(double)(rand()%10000)/10000.0;
+    double tt=-T*log(x);
+    return tt;
+}
+
 Bacteria::Bacteria()
 {
 
@@ -33,7 +40,7 @@ Bacteria::Bacteria(double x, double y, double theta, double length, int num, Env
     this->length=length;
 }
 
-void Bacteria::Update()
+void Bacteria::Update(double t)
 {
     vector3d zero(0,0,0);
     for(int i=0;i<this->num;i++)
@@ -48,9 +55,16 @@ void Bacteria::Update()
         tetha-=3.14159*2;
 
     vector3d pullFV(cos(tetha),sin(tetha),0);
-
-    mList[0]->F=mList[0]->F+pullFV*(isPulled*(e->multiF-1)+1)*2*num;
-
+    if(t>lastRevT+revT){
+        tetha+=3.14159;
+        isRev=(!isRev);
+        lastRevT=t;
+        revT=FindNextRev(e->MeanRevT);
+    }
+    if(isRev==false)
+        mList[0]->F=mList[0]->F+pullFV*(isPulled*(e->multiF-1)+1)*2*num;
+    else
+        mList[num-1]->F=mList[num-1]->F+pullFV*(isPulled*(e->multiF-1)+1)*2*num;
 
 }
 

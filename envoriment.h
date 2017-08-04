@@ -8,6 +8,7 @@ class Bacteria;
 class Envoriment
 {
 public:
+    double MeanRevT;
     void PeriodicBoundaryCondition(vector3d *r);
     double dt;
     std::vector<Bacteria*> bList;
@@ -16,7 +17,7 @@ public:
     double Lx, Ly, Lz;
     double mu;
     double multiF;
-    Envoriment(double Lx, double Ly, double Lz,double mu,int num,double multiF);
+    Envoriment(double Lx, double Ly, double Lz,double mu,int num,double multiF,double MeanRevT);
     void update();
     void WtoFile();
     int Desnity();

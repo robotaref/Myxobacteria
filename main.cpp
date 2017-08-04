@@ -20,7 +20,7 @@ int main(int argc, char *argv[])
         }
         for(int wtc=0;wtc<change;wtc++){
             for(int tr=0;tr<TryNum;tr++){
-                Envoriment *e=new Envoriment(200,200,20,1,100,4);
+                Envoriment *e=new Envoriment(200,200,20,1,100,4,4);
                 for(int t=0;t<=steps;t++){
                     e->update();
                     // e->DesnityToFile(t,10);
@@ -46,15 +46,15 @@ int main(int argc, char *argv[])
         return 0;
     }
 
-        QApplication a(argc, argv);
-        Envoriment *e=new Envoriment(200,200,20,1,100,4);
+    QApplication a(argc, argv);
+    Envoriment *e=new Envoriment(200,200,20,1,100,4,4);
 
-        MainWindow w(e,500,500);
+    MainWindow w(e,500,500);
 
-        QTimer *t=new QTimer();
-        t->start(1);
-        w.show();
-        MainWindow::connect(t,SIGNAL(timeout()),&w,SLOT(repaint()));
+    QTimer *t=new QTimer();
+    t->start(1);
+    w.show();
+    MainWindow::connect(t,SIGNAL(timeout()),&w,SLOT(repaint()));
 
     return a.exec();
 

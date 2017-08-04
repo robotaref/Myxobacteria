@@ -38,9 +38,10 @@ Envoriment::Envoriment()
 
 }
 
-Envoriment::Envoriment(double Lx, double Ly, double Lz, double mu, int num, double multiF)
+Envoriment::Envoriment(double Lx, double Ly, double Lz, double mu, int num, double multiF, double MeanRevT)
 {
     this->multiF=multiF-1;
+    this->MeanRevT=MeanRevT;
     dt=pow(2,-5);
     this->Lx=Lx;
     this->Ly=Ly;
@@ -58,7 +59,7 @@ Envoriment::Envoriment(double Lx, double Ly, double Lz, double mu, int num, doub
 void Envoriment::update()
 {
     for(int i=0;i<this->bList.size();i++)
-        bList[i]->Update();
+        bList[i]->Update(this->t);
 
     for(int i=0;i<this->bList.size();i++)
         bList[i]->Move();

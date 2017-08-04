@@ -12,6 +12,7 @@ class spring;
 class Bacteria
 {
 public:
+    double FindNextRev(double T);
     vector<mass*> mList;
     vector<spring*> sList;
     Envoriment *e;
@@ -22,9 +23,11 @@ public:
     double tetha;
     double pullF;
     double length;
+    bool isRev;
     Bacteria(double x, double y,double theta, double length, int num, Envoriment *e,int id);
-    void Update();
+    void Update(double t);
     void Move();
+    double lastRevT,revT;
 };
 
 #endif // BACTERIA_H
