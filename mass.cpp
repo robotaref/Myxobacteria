@@ -86,7 +86,7 @@ void mass::FindF()
             b->e->PeriodicBoundaryCondition(&Rmm);
             double lmm=Rmm.length();
 
-            if( lmm <5){
+            if( lmm <2){
                 b->isPulled=b->e->bList[i]->isPulled=1;
 
                 if(lmm<=1)

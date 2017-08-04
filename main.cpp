@@ -13,6 +13,7 @@ double data[steps/frequency+1][change];
 int main(int argc, char *argv[])
 {
     int V=1;
+    int l=375;
     if(V==0){
         for(int i=0;i<=steps/frequency;i++){
             for(int j=0;j<change;j++)
@@ -20,7 +21,7 @@ int main(int argc, char *argv[])
         }
         for(int wtc=0;wtc<change;wtc++){
             for(int tr=0;tr<TryNum;tr++){
-                Envoriment *e=new Envoriment(200,200,20,1,100,4,4);
+                Envoriment *e=new Envoriment(l,l,20,1,100,4,15);
                 for(int t=0;t<=steps;t++){
                     e->update();
                     // e->DesnityToFile(t,10);
@@ -47,14 +48,11 @@ int main(int argc, char *argv[])
     }
 
     QApplication a(argc, argv);
-    Envoriment *e=new Envoriment(200,200,20,1,100,4,4);
+    Envoriment *e=new Envoriment(l,l,20,1,900,4,15);
 
     MainWindow w(e,500,500);
-
-    QTimer *t=new QTimer();
-    t->start(1);
     w.show();
-    MainWindow::connect(t,SIGNAL(timeout()),&w,SLOT(repaint()));
+
 
     return a.exec();
 

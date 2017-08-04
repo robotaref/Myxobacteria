@@ -24,7 +24,9 @@ Bacteria::Bacteria(double x, double y, double theta, double length, int num, Env
     for(int i=0;i<num-1;i++){
         sList.push_back(new spring(length,1000,this));
     }
-
+    this->isRev=false;
+    this->lastRevT=0;
+    this->revT=FindNextRev(e->MeanRevT);
     for(int i=0;i<num;i++){
         vector3d r(x+length*i*cos(theta),y+length*i*sin(theta),0);
         vector3d v(0,0,0);
